@@ -1,37 +1,58 @@
 document.getElementById('btnInserir').onclick = criarLista;
+document.getElementById('btnQdtSexo').onclick = quantidadeSexo;
+document.getElementById('btnHomemAlto').onclick = compararAltura;
+
 
 const lista = [];
+const homens = [];
+const mulheres = [];
 
 function criarLista() {
 
     const pessoa = {
         nome: document.getElementById('nome').value,
-        altura: document.getElementById('altura').value,
+        altura: parseFloat(document.getElementById('altura').value),
         sexo: document.getElementById('sexo').value,
     }
 
-    let masculino = 0;
-    let feminino = 0;
-    let alturaMaior = parseFloat(pessoa.altura[0]);
-    let sexoAlturaMaior = pessoa.sexo[0];
-
     lista.push(pessoa);
+}
 
-    for(i=0;i<sexo.length; i++){
-        if(pessoa.sexo[i] == "M"){
-            masculino ++;
-        }else if (pessoa.sexo[i] == "F"){
-            feminino ++;
-        }    
-    } 
 
-    if(parseFloat(pessoa.altura[i]) > alturaMaior) {
-        alturaMaior = parseFloat(pessoa.altura[i]);
-        sexoAlturaMaior = pessoa.sexo[i];
+function quantidadeSexo() {
+
+    for(let pessoa of lista) {
+        if(pessoa.sexo === "M"){
+            homens.push(pessoa);
+        }else {
+            mulheres.push(pessoa);
+        }
     }
 
-    document.write("Masculino: " +masculino+ "Feminino: " +feminino+"<br>");
-    document.write("A maior altura é" +alturaMaior+ "e pertence ao sexo" +sexoAlturaMaior);
+    document.getElementById('lblMasculino').innerHTML = `Existem ${homens.length} homens nesta lista`;
+    document.getElementById('lblFeminino').innerHTML = `Existem ${mulheres.length} mulheres nesta lista`;
+}
+
+
+function compararAltura() {
+
+    let homemAlto;//usado como variavel de suporte
+    let mulherAlta;
+ 
+    for(let i=1; i<homens.length; i++){
+        if(homens[i].altura > homens[i-1].altura){
+            homemAlto = homens[i];
+        }
+    }
+
+    for(let i=1; i<mulheres.length; i++){
+        if(mulheres[i].altura > mulheres[i-1].altura){
+            mulherAlta = mulheres[i];
+        }
+    }
+
+    document.getElementById('homemAlto').innerHTML = `${homemAlto.nome} é o mais alto`;
+    document.getElementById('mulherAlta').innerHTML = `${mulherAlta.nome} é a mais alta`;
 }
 
 
