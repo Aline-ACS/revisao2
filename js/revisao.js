@@ -7,25 +7,31 @@ function criarLista() {
     const pessoa = {
         nome: document.getElementById('nome').value,
         altura: document.getElementById('altura').value,
-        masculino: document.getElementById('masculino').checked,
-        feminino: document.getElementById('feminino').checked,
+        sexo: document.getElementById('sexo').value,
     }
+
+    let masculino = 0;
+    let feminino = 0;
+    let alturaMaior = parseFloat(pessoa.altura[0]);
+    let sexoAlturaMaior = pessoa.sexo[0];
 
     lista.push(pessoa);
 
-    for(let novaPessoa of lista){
-        document.getElementById('novaPessoa').innerHTML += 
-        `<table>
-             <thead></thead>
-            <tbody">
-                <tr>
-                <td> ${novaPessoa.nome} </td>
-                <td> ${novaPessoa.altura} </td>
-                <td> ${novaPessoa.masculino} ${novaPessoa.feminino} </td>
-                </tr>
-            </tbodyid=>
-        </table><br>`; 
+    for(i=0;i<sexo.length; i++){
+        if(pessoa.sexo[i] == "M"){
+            masculino ++;
+        }else if (pessoa.sexo[i] == "F"){
+            feminino ++;
+        }    
     } 
+
+    if(parseFloat(pessoa.altura[i]) > alturaMaior) {
+        alturaMaior = parseFloat(pessoa.altura[i]);
+        sexoAlturaMaior = pessoa.sexo[i];
+    }
+
+    document.write("Masculino: " +masculino+ "Feminino: " +feminino+"<br>");
+    document.write("A maior altura é" +alturaMaior+ "e pertence ao sexo" +sexoAlturaMaior);
 }
 
 
